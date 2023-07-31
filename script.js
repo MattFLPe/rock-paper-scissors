@@ -1,7 +1,8 @@
-// Create function to randomly generate Rock, Paper or Scissors
 
 let playerScore = 0;
 let cpuScore = 0;
+
+// Create function to randomly generate Rock, Paper or Scissors
 
 function getComputerChoice(){
     let computerChoice = ["rock", "paper", "scissors"];
@@ -11,51 +12,66 @@ function getComputerChoice(){
 
 // Create a function to play a single round
 
-function playRound(playerSelection, computerSelection){
-    
-    if (playerSelection.toLowerCase() === computerSelection) {
+function playRound(playerChoice, computerChoice) {
+    if (playerChoice === computerChoice) {
         return "It's a tie!";
-     } else if (playerSelection.toLowerCase() === "rock" && computerSelection === "scissors") { 
+     } else if (playerChoice === "rock" && computerChoice ===  "scissors") { 
         playerScore+=1;
         return "You win! Rock beats Scissors";
-     } else if (playerSelection.toLowerCase() === "paper" && computerSelection === "rock") {
+     } else if (playerChoice === "paper" && computerChoice === "rock") {
         playerScore+=1;
         return "You win! Paper beats Rock";
-     } else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "paper") {
+     } else if (playerChoice === "scissors" && computerChoice === "paper") {
         playerScore+=1;
         return "You win! Scissors beats Paper";
      } else {
         cpuScore+=1;
-        return `You lose! ${computerSelection} beats ${playerSelection}`;
+        return `You lose! ${computerChoice} beats ${playerChoice}`;
      }
+     
   }
   
+ // In order to play the game, users will have to click one of the buttons;
+const scorePlayer = document.querySelector('#player-score')
+const scoreCPU = document.querySelector('#cpu-score')
+const btnRock = document.querySelector('.btn-rock')
+const btnPaper = document.querySelector('.btn-paper')
+const btnScissors = document.querySelector('.btn-scissors')
+
+btnRock.addEventListener('click', () => {
+console.log(playRound("rock", getComputerChoice()))
+scorePlayer.innerHTML = `Player: ${playerScore}`
+scoreCPU.innerHTML = `CPU: ${cpuScore}`
+});
+
+btnPaper.addEventListener('click', () => {
+console.log(playRound("paper", getComputerChoice()))
+scorePlayer.innerHTML = `Player: ${playerScore}`
+scoreCPU.innerHTML = `CPU: ${cpuScore}`
+});
+
+btnScissors.addEventListener('click', () => {
+console.log(playRound("scissors", getComputerChoice()))
+scorePlayer.innerHTML = `Player: ${playerScore}`
+scoreCPU.innerHTML = `CPU: ${cpuScore}`
+}); 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
   
 
-  // Create a function to play five rounds 
 
-function game(){
-    for (let i = 0; i < 5; i++){
-    const playerSelection = prompt("What is your choice?");
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-    }
-    
-}
-  game();
 
-  // Keep track of score and announces the winner
+ 
 
-  if(playerScore){
-    console.log("Player:"+" "+ playerScore +" "+"CPU:"+" "+ cpuScore);
-  } else if(cpuScore){
-    console.log("Player:"+" "+ playerScore +" "+"CPU:"+" "+ cpuScore);
-  }
-
-  if(playerScore > cpuScore){
-    alert("Player is the winner!");
-} else if(playerScore < cpuScore) {
-    alert("Computer is the winner!");
-} else {
-    alert("It's a tie!");
-};
