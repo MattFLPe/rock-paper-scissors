@@ -11,8 +11,8 @@ function getComputerChoice(){
 
 // This function contains the conditional statements to decide the winner of the round
 
-const scorePlayer = document.querySelector('#player-score')
-const scoreCPU = document.querySelector('#cpu-score')
+let scorePlayer = document.querySelector('#player-score')
+let scoreCPU = document.querySelector('#cpu-score')
 
 function playRound(playerChoice, computerChoice) {
   const div = document.querySelector('.log')
@@ -21,19 +21,19 @@ function playRound(playerChoice, computerChoice) {
      } else if (playerChoice === "rock" && computerChoice ===  "scissors") {
         playerScore+=1;
         scorePlayer.innerHTML = `Player: ${playerScore}`
-        div.innerHTML = "You win! Rock beats Scissors";
+        div.innerHTML = "You win! You chose rock, which beats scissors!";
      } else if (playerChoice === "paper" && computerChoice === "rock") {
         playerScore+=1;
         scorePlayer.innerHTML = `Player: ${playerScore}`
-        div.innerHTML = "You win! Paper beats Rock";
+        div.innerHTML = "You win! You chose paper, which beats rock!";
      } else if (playerChoice === "scissors" && computerChoice === "paper") {
         playerScore+=1;
         scorePlayer.innerHTML = `Player: ${playerScore}`
-        div.innerHTML = "You win! Scissors beats Paper";
+        div.innerHTML = "You win! You chose scissors, which beats paper!";
      } else {
         cpuScore+=1;
         scoreCPU.innerHTML = `CPU: ${cpuScore}`
-        div.innerHTML = `You lose! ${computerChoice} beats ${playerChoice}`;
+        div.innerHTML = `You lose! Computer chose ${computerChoice}, which beats ${playerChoice}!`;
      }
 
      if(playerScore == 5){
@@ -45,6 +45,9 @@ function playRound(playerChoice, computerChoice) {
    } else if(cpuScore == 5){
       winner = document.querySelector('.result')
       winner.textContent = "Computer is the winner!"
+      btnRock.setAttribute("disabled", 1);
+      btnPaper.setAttribute("disabled", 1);
+      btnScissors.setAttribute("disabled", 1);
    }
   }
   
@@ -62,9 +65,6 @@ playRound("paper", getComputerChoice())
 btnScissors.addEventListener('click', () => {
 playRound("scissors", getComputerChoice())
 }); 
-
-
-
 
 
 
