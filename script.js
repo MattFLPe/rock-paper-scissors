@@ -2,59 +2,69 @@
 let playerScore = 0;
 let cpuScore = 0;
 
-// Create function to randomly generate Rock, Paper or Scissors
+// This function is here to randomly generate Rock, Paper or Scissors 
 
 function getComputerChoice(){
     let computerChoice = ["rock", "paper", "scissors"];
-    return computerChoice[Math.floor(Math.random() * computerChoice.length)]; 
-    
+    return computerChoice[Math.floor(Math.random() * computerChoice.length)];   
 }
 
-// Create a function to play a single round
+// This function contains the conditional statements to decide the winner of the round
+
+const scorePlayer = document.querySelector('#player-score')
+const scoreCPU = document.querySelector('#cpu-score')
 
 function playRound(playerChoice, computerChoice) {
+  const div = document.querySelector('.log')
     if (playerChoice === computerChoice) {
-        return "It's a tie!";
-     } else if (playerChoice === "rock" && computerChoice ===  "scissors") { 
+      div.innerHTML = "It's a tie!";
+     } else if (playerChoice === "rock" && computerChoice ===  "scissors") {
         playerScore+=1;
-        return "You win! Rock beats Scissors";
+        scorePlayer.innerHTML = `Player: ${playerScore}`
+        div.innerHTML = "You win! Rock beats Scissors";
      } else if (playerChoice === "paper" && computerChoice === "rock") {
         playerScore+=1;
-        return "You win! Paper beats Rock";
+        scorePlayer.innerHTML = `Player: ${playerScore}`
+        div.innerHTML = "You win! Paper beats Rock";
      } else if (playerChoice === "scissors" && computerChoice === "paper") {
         playerScore+=1;
-        return "You win! Scissors beats Paper";
+        scorePlayer.innerHTML = `Player: ${playerScore}`
+        div.innerHTML = "You win! Scissors beats Paper";
      } else {
         cpuScore+=1;
-        return `You lose! ${computerChoice} beats ${playerChoice}`;
+        scoreCPU.innerHTML = `CPU: ${cpuScore}`
+        div.innerHTML = `You lose! ${computerChoice} beats ${playerChoice}`;
      }
-     
+
+     if(playerScore == 5){
+      const winner = document.querySelector('.result')
+      winner.textContent = "You are the winner!"
+      btnRock.setAttribute("disabled", 1);
+      btnPaper.setAttribute("disabled", 1);
+      btnScissors.setAttribute("disabled", 1);
+   } else if(cpuScore == 5){
+      winner = document.querySelector('.result')
+      winner.textContent = "Computer is the winner!"
+   }
   }
   
  // In order to play the game, users will have to click one of the buttons;
-const scorePlayer = document.querySelector('#player-score')
-const scoreCPU = document.querySelector('#cpu-score')
 const btnRock = document.querySelector('.btn-rock')
 const btnPaper = document.querySelector('.btn-paper')
 const btnScissors = document.querySelector('.btn-scissors')
 
 btnRock.addEventListener('click', () => {
-console.log(playRound("rock", getComputerChoice()))
-scorePlayer.innerHTML = `Player: ${playerScore}`
-scoreCPU.innerHTML = `CPU: ${cpuScore}`
+playRound("rock", getComputerChoice())
 });
-
 btnPaper.addEventListener('click', () => {
-console.log(playRound("paper", getComputerChoice()))
-scorePlayer.innerHTML = `Player: ${playerScore}`
-scoreCPU.innerHTML = `CPU: ${cpuScore}`
+playRound("paper", getComputerChoice())
 });
-
 btnScissors.addEventListener('click', () => {
-console.log(playRound("scissors", getComputerChoice()))
-scorePlayer.innerHTML = `Player: ${playerScore}`
-scoreCPU.innerHTML = `CPU: ${cpuScore}`
+playRound("scissors", getComputerChoice())
 }); 
+
+
+
 
 
 
